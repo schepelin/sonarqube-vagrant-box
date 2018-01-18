@@ -8,3 +8,5 @@
   roles:
     - role: 'ANXS.postgresql'
       become: true
+    - role: 'sonar'
+      become: true

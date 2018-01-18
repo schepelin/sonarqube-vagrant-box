@@ -1,0 +1,12 @@
+
+- name: Add Open JDK repository
+  become: yes
+  apt_repository:
+    repo: 'ppa:openjdk-r/ppa'
+
+- name: Install Open JDK
+  become: yes
+  apt:
+    name: openjdk-8-jdk
+    update_cache: yes
+    state: present

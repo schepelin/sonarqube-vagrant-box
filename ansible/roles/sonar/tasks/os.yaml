@@ -1,0 +1,39 @@
+
+- name: Create system user for sonarqube
+  user:
+    name: "{{ sonar_service_user }}"
+    groups: "sudo"
+    state: present
+
+- name: Tweak virtual memory map count
+  become: yes
+  sysctl:
+    name: vm.max_map_count
+    sysctl_set: yes
+    value: "{{ sonar_vm_map_count }}"
+    state: present
+    reload: yes
+
+- name: Tweak file descriptors count
+  become: yes
+  sysctl:
+    name: fs.file-max
+    sysctl_set: yes
+    value: "{{ sonar_fs_file_max }}"
+    state: present
+    reload: yes
+
+- name: Set ulimit for files
+  pam_limits:
+    domain: "{{ sonar_service_user }}"
+    limit_type: hard
+    limit_item: nofile
+    value: "{{ sonar_nofile_limit }}"
+
+- name: Set ulimit for processes
+  pam_limits:
+    domain: "{{ sonar_service_user }}"
+    limit_type: hard
+    limit_item: nproc
+    value: "{{ sonar_nproc_limit }}"
+
