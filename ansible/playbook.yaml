@@ -4,6 +4,7 @@
   vars:
     - sonar_db_name: sonar
     - sonar_db_user: sonarqube
+    - sonar_db_password: topsecret
 
   roles:
     - role: 'ANXS.postgresql'

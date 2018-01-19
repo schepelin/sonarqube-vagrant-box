@@ -3,3 +3,8 @@
 
 - include: dependencies.yaml
   when: ansible_pkg_mgr == "apt"
+
+- include: dependencies_yum.yaml
+  when: ansible_pkg_mgr == "yum"
+
+- include: sonar.yaml

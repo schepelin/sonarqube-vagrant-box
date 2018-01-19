@@ -1,8 +1,13 @@
 
+- name: Create group for sonar user
+  group:
+    name: "{{ sonar_service_user }}"
+    state: present
+
 - name: Create system user for sonarqube
   user:
     name: "{{ sonar_service_user }}"
-    groups: "sudo"
+    groups: "{{ sonar_service_user }},sudo"
     state: present
 
 - name: Tweak virtual memory map count
